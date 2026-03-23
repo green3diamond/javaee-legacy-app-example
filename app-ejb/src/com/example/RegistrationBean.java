@@ -1,29 +1,23 @@
 package com.example;
 
-import java.rmi.RemoteException;
+import org.springframework.stereotype.Service;
 
-import javax.ejb.EJBException;
-import javax.ejb.SessionBean;
-import javax.ejb.SessionContext;
+import com.example.registration.RegistrationValidator;
 
-public class RegistrationBean implements SessionBean {
-	 
-	public String register(String username, String password) {
+/**
+ * Modern replacement for the legacy EJB 2.1 Session Bean.
+ */
+@Service
+public class RegistrationBean {
+	private final RegistrationValidator registrationValidator;
+
+	public RegistrationBean(RegistrationValidator registrationValidator) {
+		this.registrationValidator = registrationValidator;
+	}
+
+	public String register(String email, String password) {
+		registrationValidator.validate(email, password);
 		return "Hello";
 	}
-	
-	public void ejbCreate() { }
-
-	@Override
-	public void ejbActivate() throws EJBException, RemoteException { }
-
-	@Override
-	public void ejbPassivate() throws EJBException, RemoteException { }
-
-	@Override
-	public void ejbRemove() throws EJBException, RemoteException { }
-
-	@Override
-	public void setSessionContext(SessionContext arg0) throws EJBException, RemoteException { }
-
 }
+

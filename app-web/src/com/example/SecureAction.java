@@ -1,18 +1,15 @@
 package com.example;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-import org.apache.struts.action.Action;
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
-
-public class SecureAction extends Action {
-
-	@Override
-	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		return (mapping.findForward("secure"));
+@Controller
+@RequestMapping("/secure")
+public class SecureAction {
+	@GetMapping({"", "/index"})
+	public String secureIndex() {
+		return "secure/index";
 	}
-
 }
+

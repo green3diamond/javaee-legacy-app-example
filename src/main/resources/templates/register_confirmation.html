@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>Registration Confirmation</title>
+</head>
+<body>
+<div align="center">
+	<h1>You was registered!</h1>
+	<p th:if="${message}" th:text="${message}"></p>
+	<p/>
+	<a th:href="@{/}">Voltar</a>
+</div>
+</body>
+</html>
+
