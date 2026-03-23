@@ -1,0 +1,4 @@
+com/example/LegacyMigrationIntegrationTest.class
+com/example/RegistrationServiceTest.class
+com/example/AuditServiceTest.class
+com/example/CustomUserDetailsServiceTest.class

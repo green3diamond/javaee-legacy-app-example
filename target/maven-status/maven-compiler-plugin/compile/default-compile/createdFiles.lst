@@ -1,0 +1,8 @@
+com/example/AuditService.class
+com/example/SecurityConfig.class
+com/example/RegistrationService.class
+com/example/UserRepository.class
+com/example/LegacyMigrationController.class
+com/example/User.class
+com/example/CustomUserDetailsService.class
+com/example/LegacyMigrationApplication.class
