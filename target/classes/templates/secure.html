@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Secure Area</title>
+</head>
+<body>
+    <div style="text-align: center">
+        <h1>You are secure!</h1>
+        <h2>Hello, <span th:text="${username}">user</span>!</h2>
+        <p></p>
+        <form th:action="@{/logout}" method="post" style="display:inline">
+            <button type="submit">Logout</button>
+        </form>
+        <p></p>
+        <a th:href="@{/}">Back</a>
+    </div>
+</body>
+</html>

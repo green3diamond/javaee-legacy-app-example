@@ -1,0 +1,10 @@
+/Users/zlatandimitrov/GitHub/Claude_opus_test/legacy-app/src/main/java/com/example/Application.java
+/Users/zlatandimitrov/GitHub/Claude_opus_test/legacy-app/src/main/java/com/example/config/SecurityConfig.java
+/Users/zlatandimitrov/GitHub/Claude_opus_test/legacy-app/src/main/java/com/example/controller/HomeController.java
+/Users/zlatandimitrov/GitHub/Claude_opus_test/legacy-app/src/main/java/com/example/controller/RegistrationController.java
+/Users/zlatandimitrov/GitHub/Claude_opus_test/legacy-app/src/main/java/com/example/controller/SecureController.java
+/Users/zlatandimitrov/GitHub/Claude_opus_test/legacy-app/src/main/java/com/example/model/RegistrationRequest.java
+/Users/zlatandimitrov/GitHub/Claude_opus_test/legacy-app/src/main/java/com/example/model/User.java
+/Users/zlatandimitrov/GitHub/Claude_opus_test/legacy-app/src/main/java/com/example/repository/UserRepository.java
+/Users/zlatandimitrov/GitHub/Claude_opus_test/legacy-app/src/main/java/com/example/service/AppUserDetailsService.java
+/Users/zlatandimitrov/GitHub/Claude_opus_test/legacy-app/src/main/java/com/example/service/RegistrationService.java

@@ -1,0 +1,10 @@
+com/example/repository/UserRepository.class
+com/example/service/RegistrationService.class
+com/example/controller/HomeController.class
+com/example/model/RegistrationRequest.class
+com/example/model/User.class
+com/example/controller/RegistrationController.class
+com/example/config/SecurityConfig.class
+com/example/Application.class
+com/example/controller/SecureController.class
+com/example/service/AppUserDetailsService.class
