@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Secure Area</title>
+</head>
+<body>
+    <div align="center">
+        <h1>Secure Area</h1>
+        <p>Welcome to the protected area!</p>
+        <p>You are logged in as: <span th:text="${#authentication.name}">username</span></p>
+
+        <br/>
+        <a th:href="@{/}">Back to Home</a> |
+        <form th:action="@{/logout}" method="post" style="display: inline;">
+            <input type="submit" value="Logout" />
+        </form>
+    </div>
+</body>
+</html>

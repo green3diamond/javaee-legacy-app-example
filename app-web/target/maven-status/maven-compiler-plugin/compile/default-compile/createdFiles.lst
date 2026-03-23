@@ -1,0 +1,4 @@
+com/example/dto/RegistrationDTO.class
+com/example/config/SecurityConfig.class
+com/example/Application.class
+com/example/controller/AuthController.class

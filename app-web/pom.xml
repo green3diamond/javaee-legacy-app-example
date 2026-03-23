@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+                             http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.example</groupId>
+    <artifactId>app-web</artifactId>
+    <version>2.0.0</version>
+    <packaging>jar</packaging> <!-- Changed from WAR to JAR for Spring Boot -->
+
+    <parent>
+        <groupId>com.example</groupId>
+        <artifactId>javaee-legacy-app</artifactId>
+        <version>2.0.0</version>
+        <relativePath>..</relativePath>
+    </parent>
+
+    <name>App Web Module (Presentation Layer)</name>
+    <description>Web layer with Struts 1.1 - will be migrated to Spring MVC in Task 4, then Spring Boot in Task 5</description>
+
+    <dependencies>
+        <!-- ===== MODULES ===== -->
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>app-ejb</artifactId>
+            <version>2.0.0</version>
+        </dependency>
+
+        <!-- ===== EJB & SERVLET APIs ===== -->
+        <!-- EJB 3.0 API (for PortableRemoteObject, EJBHome/EJBObject interfaces) -->
+        <dependency>
+            <groupId>javax.ejb</groupId>
+            <artifactId>javax.ejb-api</artifactId>
+            <version>3.2</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>4.0.1</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet.jsp</groupId>
+            <artifactId>javax.servlet.jsp-api</artifactId>
+            <version>2.3.1</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- ===== STRUTS 1.1 (REMOVED in Task 4 - replaced by Spring MVC) ===== -->
+        <!-- NOTE: CVE-2015-4852 present, but will be eliminated in Task 4 Migration -->
+        <!-- Struts dependencies removed - replaced by Spring MVC below -->
+        <!--
+        <dependency>
+            <groupId>org.apache.struts</groupId>
+            <artifactId>struts-core</artifactId>
+            <version>1.3.10</version>
+        </dependency>
+        -->
+
+        <!-- ===== COMMONS LIBRARIES (Upgraded to CVE-free versions) ===== -->
+        <!-- CVE-2014-0114 fixed in commons-beanutils 1.9.4+ -->
+        <dependency>
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils</artifactId>
+            <version>1.9.4</version>
+            <!-- Rationale: 1.9.4 eliminates ClassLoader manipulation vulnerability
+                 Still used by Struts 1.3.10; will be removed when Struts eliminated -->
+        </dependency>
+
+        <!-- commons-collections (upgraded from 2.1 to 3.2.2 to avoid serialization gadgets) -->
+        <dependency>
+            <groupId>commons-collections</groupId>
+            <artifactId>commons-collections</artifactId>
+            <version>3.2.2</version>
+            <!-- Rationale: 3.2.2 last version before Apache Commons Collections 4.x
+                 Address serialization gadget chains (CVE-2013-2271)
+                 Not directly used by Struts, but pulled in transitively -->
+        </dependency>
+
+        <!-- commons-digester (upgraded from 1.5 to 2.1, then to 3.2 to fix XXE CVE-2014-1445) -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-digester3</artifactId>
+            <version>3.2</version>
+            <!-- Rationale: 3.x branch fixes XXE (CVE-2014-1445) 
+                 Struts 1.3.10 compatible with either version
+                 Will be removed when Struts eliminated -->
+        </dependency>
+
+        <!-- commons-lang (upgraded from 1.0.1 to 3.14.0 for modern idioms) -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.14.0</version>
+            <!-- Rationale: 3.x is modern commons-lang; 1.x extremely old and outdated
+                 Provides modern string/reflection utilities; drop-in for many 1.x usages
+                 Will be used by new Spring code as well -->
+        </dependency>
+
+        <!-- commons-fileupload (upgraded from 1.0 to 1.5, requires commons-io >= 2.4) -->
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+            <version>1.5</version>
+            <!-- Rationale: 1.5 is latest; fixes temp file predictability (CVE-2013-1664)
+                 When combined with commons-io >= 2.4, eliminates DoS risk -->
+        </dependency>
+
+        <!-- commons-io (added; required by commons-fileupload >= 1.5) -->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.15.1</version>
+        </dependency>
+
+        <!-- commons-logging (upgraded from 1.0.3 to 1.3.0, but prefer SLF4J) -->
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+            <version>1.3.0</version>
+            <!-- Rationale: 1.3.0 is latest in 1.x line
+                 Used by Struts 1.3.10; will be removed when Struts eliminated
+                 SLF4J will be primary logger (Spring Boot default) -->
+        </dependency>
+
+        <!-- commons-validator (upgraded from 1.0.2 to 1.8.0) -->
+        <dependency>
+            <groupId>commons-validator</groupId>
+            <artifactId>commons-validator</artifactId>
+            <version>1.8.0</version>
+            <!-- Rationale: 1.8.0 is latest in 1.x line; used by Struts
+                 Will be replaced by Spring Validation/Jakarta Bean Validation in Task 4 -->
+        </dependency>
+
+        <!-- jakarta-oro (replacement for jakarta-oro; using ORO from Apache) -->
+        <dependency>
+            <groupId>oro</groupId>
+            <artifactId>oro</artifactId>
+            <version>2.0.8</version>
+            <!-- Rationale: Used by commons-validator for regex; will be removed when validator eliminated -->
+        </dependency>
+
+        <!-- ===== LOGGING ===== -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-logging</artifactId>
+            <!-- Rationale: Replaces commons-logging with SLF4J + Logback
+                 Will be primary logging framework post-migration -->
+        </dependency>
+
+        <!-- ===== SPRING BOOT (Task 5 - Application Server to Spring Boot) ===== -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <!-- Rationale: Includes Spring MVC + embedded Tomcat
+                 Replaces JBoss 4.0.5 application server -->
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+            <!-- Rationale: Replaces JSP + Struts tags
+                 Natural HTML templates; excellent Spring integration -->
+        </dependency>
+
+        <!-- ===== SPRING SECURITY (Task 7 - Security Remediation) ===== -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+            <!-- Rationale: Replaces JBoss JAAS authentication
+                 Provides BCrypt password hashing, CSRF protection, form login
+                 Eliminates CVE-2015-4852 (Struts ActionForm injection) -->
+        </dependency>
+
+        <!-- ===== SPRING BOOT TESTING ===== -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- Maven WAR Plugin (removed - now using JAR packaging) -->
+            <!--
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.4.0</version>
+                <configuration>
+                    <warSourceDirectory>WebRoot</warSourceDirectory>
+                    <webXml>WebRoot/WEB-INF/web.xml</webXml>
+                </configuration>
+            </plugin>
+            -->
+
+            <!-- Spring Boot Maven Plugin (enables spring-boot:run) -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>3.3.0</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- Copy web resources -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.3.1</version>
+                <executions>
+                    <execution>
+                        <id>copy-web-resources</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/${project.build.finalName}</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>WebRoot</directory>
+                                    <filtering>false</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
