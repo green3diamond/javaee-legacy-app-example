@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In</title>
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+            background: linear-gradient(180deg, #fff7ed, #ffedd5);
+            font-family: Georgia, "Times New Roman", serif;
+            color: #431407;
+        }
+        main {
+            width: min(480px, calc(100% - 2rem));
+            background: white;
+            border-radius: 22px;
+            padding: 2rem;
+            box-shadow: 0 16px 40px rgba(124, 45, 18, 0.16);
+        }
+        input {
+            width: 100%;
+            box-sizing: border-box;
+            margin-top: 0.4rem;
+            padding: 0.85rem 1rem;
+            border-radius: 12px;
+            border: 1px solid #fdba74;
+        }
+        label {
+            display: block;
+            margin-top: 1rem;
+            font-weight: 600;
+        }
+        button, a {
+            display: inline-block;
+            margin-top: 1.25rem;
+            background: #c2410c;
+            color: white;
+            text-decoration: none;
+            padding: 0.85rem 1.2rem;
+            border: 0;
+            border-radius: 999px;
+        }
+        .notice {
+            padding: 0.8rem 1rem;
+            border-radius: 12px;
+            background: #ffedd5;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+<main>
+    <h1>Secure Area Login</h1>
+    <p>Seeded admin account: <code>admin@example.com</code> / <code>Admin123</code></p>
+    <form th:action="@{/login}" method="post">
+        <label for="username">Email</label>
+        <input id="username" type="email" name="username" autocomplete="username">
+
+        <label for="password">Password</label>
+        <input id="password" type="password" name="password" autocomplete="current-password">
+
+        <button type="submit">Sign In</button>
+        <a th:href="@{/}">Back</a>
+    </form>
+
+    <p class="notice" th:if="${param.error}">The credentials were not accepted.</p>
+    <p class="notice" th:if="${param.logout}">You have been signed out.</p>
+</main>
+</body>
+</html>

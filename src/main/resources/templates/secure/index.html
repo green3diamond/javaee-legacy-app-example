@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Area</title>
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+            background:
+                radial-gradient(circle at top right, rgba(30, 64, 175, 0.18), transparent 28%),
+                linear-gradient(180deg, #eff6ff, #dbeafe);
+            font-family: Georgia, "Times New Roman", serif;
+            color: #172554;
+        }
+        main {
+            width: min(640px, calc(100% - 2rem));
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(8px);
+            border-radius: 24px;
+            padding: 2rem;
+            box-shadow: 0 16px 40px rgba(30, 64, 175, 0.15);
+        }
+        .actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        a {
+            display: inline-block;
+            margin-top: 1rem;
+            background: #1d4ed8;
+            color: white;
+            text-decoration: none;
+            padding: 0.85rem 1.2rem;
+            border-radius: 999px;
+        }
+    </style>
+</head>
+<body>
+<main>
+    <p>Authentication is now handled by Spring Security instead of JBoss JAAS.</p>
+    <h1>You are secure</h1>
+    <h2 th:text="'Hello, ' + ${username} + '!'"></h2>
+    <div class="actions">
+        <a th:href="@{/logout}">Sign Out</a>
+        <a th:href="@{/}">Home</a>
+    </div>
+</main>
+</body>
+</html>

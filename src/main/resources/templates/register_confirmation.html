@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Complete</title>
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+            background: linear-gradient(180deg, #f8fafc, #dbeafe);
+            font-family: Georgia, "Times New Roman", serif;
+            color: #0f172a;
+        }
+        main {
+            width: min(640px, calc(100% - 2rem));
+            background: white;
+            border-radius: 24px;
+            padding: 2rem;
+            box-shadow: 0 18px 50px rgba(15, 23, 42, 0.12);
+        }
+        pre {
+            white-space: pre-wrap;
+            background: #eff6ff;
+            padding: 1rem;
+            border-radius: 16px;
+        }
+        a {
+            display: inline-block;
+            margin-top: 1rem;
+            background: #1d4ed8;
+            color: white;
+            text-decoration: none;
+            padding: 0.85rem 1.2rem;
+            border-radius: 999px;
+        }
+    </style>
+</head>
+<body>
+<main>
+    <h1>Registration complete</h1>
+    <p>
+        <strong th:text="${registrationView.displayName()}"></strong>,
+        your account for <span th:text="${registrationView.email()}"></span> is ready.
+    </p>
+    <pre th:text="${registrationView.welcomeMessage()}"></pre>
+    <a th:href="@{/login}">Continue to sign in</a>
+</main>
+</body>
+</html>
